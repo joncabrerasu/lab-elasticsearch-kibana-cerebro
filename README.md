@@ -2,8 +2,8 @@
 Doing some elasticsearch stuff with 'cerebro' tool and kibana.
 
 This repository contains two docker compose yml files:
-* __docker-compose-elastic-node.yml__ : Runs a single node of Elastic Search, an instance of Elastic Search web admin tool called 'Cerebro' and a Kibana container.
-* __docker-compose-elastic-cluster.yml__: Runs a Elastic Search cluster with 3 nodes and containers for 'Cerebro' and 'Kibana'.
+* [a relative link](__docker-compose-elastic-node.yml__) : Runs a single node of Elastic Search, an instance of Elastic Search web admin tool called 'Cerebro' and a Kibana container.
+* [a relative link](__docker-compose-elastic-cluster.yml__): Runs a Elastic Search cluster with 3 nodes and containers for 'Cerebro' and 'Kibana'.
 
 ## Running a single Elastic Search node:
 
@@ -93,7 +93,7 @@ POST _bulk
 
 Also you can create documents in bulk with an external file using curl:
 ```
-curl -H 'Content-Type: application/json' -XPOST 'localhost:9200/_bulk' --data-binary @ads.json
+curl -H 'Content-Type: application/json' -XPOST 'localhost:9201/_bulk' --data-binary @sampledata.json
 ```
 
 When we create a new index ES infers the field mappings. We can view the mappings created for a document via:
@@ -113,3 +113,11 @@ In our example 'price' property appears as 'float' and 'created_date' as 'date'.
   }
 ```          
 In this case 'keyword' analyzer maintains de original content. Another text analyzer would be 'Standard'. This analyzer applies a standard tokenizer and a lowercase filter.
+
+You can sort by text fields if you enable 'fielddata' property. Alternatively we can use 'keyword' property from text field (i.e title.keyword) instead.
+
+When you search for documents by field, the result includes a score, which is the result of the quotient between the number of times a word appears between the documents in which the term appears.
+
+## Queries
+
+You can see some ES queries in [a relative link](kibana-queries.md) file

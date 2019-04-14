@@ -68,3 +68,42 @@ With Cerebro we can change the number of replicas. Go to index settings and chan
 It is also useful to see the usage statistics of each ES node with Cerebro:
 
 ![image](https://github.com/joncabrerasu/lab-elasticsearch-kibana-cerebro/blob/master/images/cerebro-cluster-stadistics.png)
+
+## Elastic Search
+
+We can create a 'complex' document in a new index:
+```
+POST /lab/default/ 
+{
+  "title": "Complex ad in lab ES index",
+  "type": "PROFESSIONAL",
+  "category": "Mobile",
+  "price": 750.25,
+  "created_date": "2019-04-12"
+} 
+```
+We can create documents with a bulk process too:
+```
+POST _bulk
+{ "index" : { "_index" : "lab", "_type" : "default" } }
+{ "title": "Complex ad created via bulk process", "type": "PRIVATE", "cateogory": "Car", "price": "1400.90", "created_date": "2019-04-12" }
+{ "index" : { "_index" : "lab", "_type": "default" } }
+{ "title" : "Another Complex ad created via bulk process", "type" : "PROFESSIONAL", "cateogory": "Games", "price": "15.20", "created_date": "2019-04-12" }
+```
+When we create a new index ES infers the field mappings. We can view the mappings created for a document via:
+```
+GET lab/_mapping
+```
+In our example 'price' property appears as 'float' and 'created_date' as 'date'. For the 'text' fields ES provides info about the analyzer used:
+```
+  "title" : {
+    "type" : "text",
+    "fields" : {
+      "keyword" : {
+        "type" : "keyword",
+        "ignore_above" : 256
+      }
+    }
+  }
+```          
+In this case 'keyword' analyzer maintains de original content. Another text analyzer would be 'Standard'. This analyzer applies a standard tokenizer and a lowercase filter.

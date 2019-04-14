@@ -143,8 +143,3 @@ Or a cloud of words:
 ![image](https://github.com/joncabrerasu/lab-elasticsearch-kibana-cerebro/blob/master/images/kibana5.png)
 
 Visualization can be saved to retrieve kibana info at any time.
-
-
-
-
-![image](https://github.com/joncabrerasu/lab-elasticsearch-kibana-cerebro/blob/master/images/kibana2.png)

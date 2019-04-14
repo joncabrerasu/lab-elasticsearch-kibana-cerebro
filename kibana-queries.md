@@ -31,7 +31,6 @@ POST /lab/default/
 } 
 ```
 ### Add documents via bulk process:
-### Bulk
 ```
 POST _bulk
 { "index" : { "_index" : "lab", "_type" : "default" } }
@@ -57,4 +56,87 @@ GET lab/_mapping
 ### Search documents from lab index
 ```
 POST lab/_search
+```
+### Search documents selecting field
+```
+POST lab/default/_search 
+{
+  "query": {
+    "match_all": {}
+  },
+  "_source": {
+    "includes": [ "title" ]
+  }
+}
+```
+### Search documents selecting pagination size (by default is 10)
+```
+POST lab/default/_search 
+{
+  "from" : 0, "size" : 11,
+  "query": {
+    "match_all": {}
+  }
+}
+```
+### Search documents sorting by a field
+```
+POST lab/default/_search 
+{
+  "from" : 0, "size" : 10,
+  "query": {
+    "match_all": {}
+  },
+  "sort" : [
+    {"price" : "desc"}
+  ],
+  "_source": {
+    "includes": [ "title", "price" ]
+  }
+}
+```
+### Search documents sorting by a keyword field (not analyzed field)
+```
+POST lab/default/_search 
+{
+  "from" : 0, "size" : 10,
+  "query": {
+    "match_all": {}
+  },
+  "sort" : [
+    {"title.keyword": "desc"}
+  ],
+  "_source": {
+    "includes": [ "title", "price" ]
+  }
+}
+```
+
+### Search documents filtering content from field (including score)
+```
+POST lab/default/_search 
+{
+  "query": {
+    "match": { "title" : "Complex"}
+  },
+  "_source": {
+    "includes": [ "title", "price" ]
+  }
+}
+```
+### Search documents filtering content from field (without score)
+```
+POST lab/default/_search 
+{
+  "query": {
+    "bool" : {
+      "filter" : {
+        "match": { "title" : "Complex"}
+      }
+    }
+  },
+  "_source": {
+    "includes": [ "title", "price" ]
+  }
+}
 ```

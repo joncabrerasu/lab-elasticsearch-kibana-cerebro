@@ -129,3 +129,22 @@ Kibana uses index patterns to retrieve data from Elasticsearch indices for thing
 ![image](https://github.com/joncabrerasu/lab-elasticsearch-kibana-cerebro/blob/master/images/kibana1.png)
 
 ![image](https://github.com/joncabrerasu/lab-elasticsearch-kibana-cerebro/blob/master/images/kibana2.png)
+
+Now we can see our documents and do different queries and visualizations with them easily with kibana:
+
+![image](https://github.com/joncabrerasu/lab-elasticsearch-kibana-cerebro/blob/master/images/kibana3.png)
+
+And we can create different visualizations from 'Visualize' section. This is a 'pie' chart from our index selecting a 'Range' aggregation by 'price' field:
+
+![image](https://github.com/joncabrerasu/lab-elasticsearch-kibana-cerebro/blob/master/images/kibana4.png)
+
+Or a cloud of words:
+
+![image](https://github.com/joncabrerasu/lab-elasticsearch-kibana-cerebro/blob/master/images/kibana5.png)
+
+Visualization can be saved to retrieve kibana info at any time.
+
+
+
+
+![image](https://github.com/joncabrerasu/lab-elasticsearch-kibana-cerebro/blob/master/images/kibana2.png)

@@ -90,6 +90,12 @@ POST _bulk
 { "index" : { "_index" : "lab", "_type": "default" } }
 { "title" : "Another Complex ad created via bulk process", "type" : "PROFESSIONAL", "cateogory": "Games", "price": "15.20", "created_date": "2019-04-12" }
 ```
+
+Also you can create documents in bulk with an external file using curl:
+```
+curl -H 'Content-Type: application/json' -XPOST 'localhost:9200/_bulk' --data-binary @ads.json
+```
+
 When we create a new index ES infers the field mappings. We can view the mappings created for a document via:
 ```
 GET lab/_mapping

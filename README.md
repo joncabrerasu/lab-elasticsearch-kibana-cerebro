@@ -2,8 +2,8 @@
 Doing some elasticsearch stuff with 'cerebro' tool and kibana.
 
 This repository contains two docker compose yml files:
-* [a relative link](__docker-compose-elastic-node.yml__) : Runs a single node of Elastic Search, an instance of Elastic Search web admin tool called 'Cerebro' and a Kibana container.
-* [a relative link](__docker-compose-elastic-cluster.yml__): Runs a Elastic Search cluster with 3 nodes and containers for 'Cerebro' and 'Kibana'.
+* [docker-compose-elastic-node.yml](docker-compose-elastic-node.yml) : Runs a single node of Elastic Search, an instance of Elastic Search web admin tool called 'Cerebro' and a Kibana container.
+* [docker-compose-elastic-cluster.yml](docker-compose-elastic-cluster.yml): Runs a Elastic Search cluster with 3 nodes and containers for 'Cerebro' and 'Kibana'.
 
 ## Running a single Elastic Search node:
 
@@ -120,4 +120,4 @@ When you search for documents by field, the result includes a score, which is th
 
 ## Queries
 
-You can see some ES queries in [a relative link](kibana-queries.md) file
+You can see some ES queries in [kibana queries](kibana-queries.md) file

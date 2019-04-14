@@ -121,3 +121,11 @@ When you search for documents by field, the result includes a score, which is th
 ## Queries
 
 You can see some ES queries in [kibana queries](kibana-queries.md) file
+
+## Create an index pattern in kibana
+
+Kibana uses index patterns to retrieve data from Elasticsearch indices for things like visualizations. We can create an index pattern in Kibana by clickin in 'Discover' section:
+
+![image](https://github.com/joncabrerasu/lab-elasticsearch-kibana-cerebro/blob/master/images/kibana1.png)
+
+![image](https://github.com/joncabrerasu/lab-elasticsearch-kibana-cerebro/blob/master/images/kibana2.png)

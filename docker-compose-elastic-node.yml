@@ -1,0 +1,44 @@
+version: '3.5'
+
+services:
+  elasticsearch:
+    container_name: elasticsearch-lab
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+    environment:
+      - "cluster.name=elasticsearch-lab-cluster"
+      - "node.name=elasticsearch-lab-node"
+      - "network.host=0.0.0.0"
+      - "xpack.security.enabled=false"
+      - "xpack.monitoring.enabled=false"
+      - "xpack.watcher.enabled=false"
+      - "xpack.ml.enabled=false"
+      - "bootstrap.memory_lock=true"
+      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+    ulimits:
+      memLock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+  carebro:
+    container_name: cerebro-lab
+    image: lmenezes/cerebro:0.8.3
+    ports:
+      - "9000:9000"
+    command:
+      - -Dhosts.0.host=http://elasticsearch-lab:9200
+    external_links:
+      - elasticsearch-lab:elasticsearch
+
+  kibana:
+    container_name: kibana-lab
+    image: docker.elastic.co/kibana/kibana:6.5.4
+    ports:
+      - "5601:5601"
+    external_links:
+      - "elasticsearch-lab:elasticsearch"
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+

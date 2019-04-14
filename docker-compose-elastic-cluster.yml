@@ -1,0 +1,96 @@
+version: '3.5'
+
+services:
+  elasticsearch-lab-1:
+    container_name: elasticsearch-lab-1
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+    environment:
+      - "cluster.name=elasticsearch-lab-cluster"
+      - "node.name=elasticsearch-lab-node-1"
+      - "network.host=0.0.0.0"
+      - "xpack.security.enabled=false"
+      - "xpack.monitoring.enabled=false"
+      - "xpack.watcher.enabled=false"
+      - "xpack.ml.enabled=false"
+      - "bootstrap.memory_lock=true"
+      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch-lab-1,elasticsearch-lab-2,elasticsearch-lab-3"
+      - "discovery.zen.minimum_master_nodes=2"
+    ulimits:
+      memLock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9201:9200"
+      - "9301:9300"
+
+  elasticsearch-lab-2:
+    container_name: elasticsearch-lab-2
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+    environment:
+      - "cluster.name=elasticsearch-lab-cluster"
+      - "node.name=elasticsearch-lab-node-2"
+      - "network.host=0.0.0.0"
+      - "xpack.security.enabled=false"
+      - "xpack.monitoring.enabled=false"
+      - "xpack.watcher.enabled=false"
+      - "xpack.ml.enabled=false"
+      - "bootstrap.memory_lock=true"
+      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch-lab-1,elasticsearch-lab-2,elasticsearch-lab-3"
+      - "discovery.zen.minimum_master_nodes=2"
+    ulimits:
+      memLock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9202:9200"
+      - "9302:9300"
+
+  elasticsearch-lab-3:
+    container_name: elasticsearch-lab-3
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+    environment:
+      - "cluster.name=elasticsearch-lab-cluster"
+      - "node.name=elasticsearch-lab-node-3"
+      - "network.host=0.0.0.0"
+      - "xpack.security.enabled=false"
+      - "xpack.monitoring.enabled=false"
+      - "xpack.watcher.enabled=false"
+      - "xpack.ml.enabled=false"
+      - "bootstrap.memory_lock=true"
+      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch-lab-1,elasticsearch-lab-2,elasticsearch-lab-3"
+      - "discovery.zen.minimum_master_nodes=2"
+    ulimits:
+      memLock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9203:9200"
+      - "9303:9300"
+
+  carebro:
+    container_name: cerebro-lab
+    image: lmenezes/cerebro:0.8.1
+    ports:
+      - "9000:9000"
+    command:
+      - -Dhosts.0.host=http://elasticsearch-lab-1:9200
+      - -Dhosts.1.host=http://elasticsearch-lab-2:9200
+      - -Dhosts.2.host=http://elasticsearch-lab-3:9200
+    external_links:
+      - elasticsearch-lab-1:elasticsearch1
+      - elasticsearch-lab-2:elasticsearch2
+      - elasticsearch-lab-3:elasticsearch3
+
+  kibana:
+    container_name: kibana-lab
+    image: docker.elastic.co/kibana/kibana:6.5.4
+    ports:
+      - "5601:5601"
+    external_links:
+      - elasticsearch-lab-1:elasticsearch1
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch1:9200
+
